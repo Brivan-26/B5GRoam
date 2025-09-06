@@ -7,7 +7,7 @@ import "../src/Agreement.sol";
 import {Vm} from "forge-std/Vm.sol";
 import {console} from "forge-std/console.sol";
 import "../test/Poseidon.sol";
-
+import {console} from "forge-std/console.sol";
 contract SubmitCDR is Script {
     function run() external {
         Agreement agreement = Agreement(0x420a1bC7AA832E2521389c618bC7D309b8F4F1df);
@@ -21,6 +21,8 @@ contract SubmitCDR is Script {
         uint256[3] memory roamingUsage = [uint256(10), uint256(10240), uint256(60)];
         uint256 cdrHash = PoseidonT4.hash(roamingUsage);
 
+        console.log("CDR HASH: ", cdrHash);
+        
         agreement.submitCDR(sessionId, bytes32(cdrHash));
         vm.stopBroadcast();
 
