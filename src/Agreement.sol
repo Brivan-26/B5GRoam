@@ -58,6 +58,11 @@ contract Agreement {
         uint256 refundedAmount
     );
 
+    event CDRSubmitted(
+        address indexed ue,
+        bytes32 cdrHash
+    );
+
     event PaymentTokenChanged(address indexed oldPaymentToken, address indexed newPaymentToken);
 
     error InvalidProof();
@@ -149,6 +154,8 @@ contract Agreement {
         require(msg.sender == session.ueAddress, "Only UE can supply CDR hash of his roaming session");
         require(session.ueCDRHash == bytes32(0), "CDR hash for this session is already set");
         session.ueCDRHash = cdrHash;
+
+        emit CDRSubmitted(msg.sender, cdrHash);
     }
 
 

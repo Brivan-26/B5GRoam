@@ -15,6 +15,7 @@ contract AgreementFactoryDeployment is Script {
         MockUSDC usdc = new MockUSDC();
         Groth16Verifier groth16Verifier = new Groth16Verifier();
         AgreementFactory agreementFactory = new AgreementFactory(address(usdc), address(groth16Verifier));
+        console.log("USDC contract: ", address(usdc));
         console.log("contract address: ", address(agreementFactory));
         vm.stopBroadcast();
     }
